@@ -70,5 +70,15 @@ public class Funcionario implements Serializable {
 		return salario.add(proventos).subtract(descontos);
 
 	}
+	
+	private double irrfCalculado;
+
+	public double getIrrfCalculado() {
+	    return irrfCalculado;
+	}
+
+	public void setIrrfCalculado(double irrfCalculado) {
+	    this.irrfCalculado = irrfCalculado;
+	}
 
 }

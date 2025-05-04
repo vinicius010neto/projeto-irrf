@@ -17,8 +17,18 @@ private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
 
 public void listar() {
-	funcionarios = funcionarioDAO.listar();
+    funcionarios = funcionarioDAO.listar();
+    for (Funcionario f : funcionarios) {
+    	
+        double irrf = funcionarioDAO.calcularIRRF(
+            f.getSalario().doubleValue(),
+            f.getProventos().doubleValue()
+        );
+
+        f.setIrrfCalculado(irrf);
+    }
 }
+
 public void inserir() {
 	funcionarioDAO.inserir(funcionario);
 	funcionario = new Funcionario();
@@ -53,6 +63,13 @@ public List<Funcionario> getFuncionarios() {
 public void setFuncionarios(List<Funcionario> funcionarios) {
 	this.funcionarios = funcionarios;
 }
+
+public double getIrrfCalculado(Funcionario funcionario) {
+	return funcionarioDAO.calcularIRRF(
+			funcionario.getSalario().doubleValue(), 
+			funcionario.getProventos().doubleValue()
+		);
+	}
 
 
 }

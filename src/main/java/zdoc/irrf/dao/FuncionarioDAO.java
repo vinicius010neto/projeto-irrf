@@ -14,6 +14,11 @@ public class FuncionarioDAO {
 	private final String PASS = "db_pass";
 
 	private Connection getConnection() throws SQLException {
+		 try {
+		        Class.forName("org.postgresql.Driver"); 
+		    } catch (ClassNotFoundException e) {
+		        e.printStackTrace();
+		    }
 		return DriverManager.getConnection(URL, USER, PASS);
 	}
 
@@ -82,7 +87,8 @@ public class FuncionarioDAO {
 
 	public double calcularIRRF(double salario, double proventos) {
 		double irrf = 0;
-		String sql = "SELECT calcula_irrf(?, ?)";
+		String sql = "SELECT calcula_irrf(CAST(? AS numeric), CAST(? AS numeric))";
+
 
 		try (Connection conn = getConnection();
 		     PreparedStatement pstmt = conn.prepareStatement(sql)) {
