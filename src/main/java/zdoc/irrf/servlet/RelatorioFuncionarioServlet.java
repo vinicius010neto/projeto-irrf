@@ -23,7 +23,7 @@ public class RelatorioFuncionarioServlet extends HttpServlet {
 
         Funcionario funcionario = funcionarioDAO.buscarPorId(funcionarioId);
 
-        // ✅ Calcular IRRF antes de gerar o relatório
+      
         double irrf = funcionarioDAO.calcularIRRF(
             funcionario.getSalario().doubleValue(),
             funcionario.getProventos().doubleValue()
