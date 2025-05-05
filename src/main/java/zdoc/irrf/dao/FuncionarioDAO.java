@@ -84,6 +84,34 @@ public class FuncionarioDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public Funcionario buscarPorId(int id) {
+	    String sql = "SELECT * FROM funcionarios WHERE id = ?";
+	    Funcionario funcionario = null;
+
+	    try (Connection conn = getConnection(); 
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setInt(1, id);
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            if (rs.next()) {
+	                funcionario = new Funcionario();
+	                funcionario.setId(rs.getInt("id"));
+	                funcionario.setNome(rs.getString("nome"));
+	                funcionario.setCpf(rs.getString("cpf"));
+	                funcionario.setSalario(rs.getBigDecimal("salario"));
+	                funcionario.setProventos(rs.getBigDecimal("proventos"));
+	                funcionario.setDescontos(rs.getBigDecimal("descontos"));
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return funcionario;
+	}
+
 
 	public double calcularIRRF(double salario, double proventos) {
 		double irrf = 0;

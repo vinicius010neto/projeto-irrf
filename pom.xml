@@ -68,6 +68,37 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>42.2.27</version>
 	  </dependency>
+	  <!-- iText para exportação em PDF -->
+<dependency>
+    <groupId>com.lowagie</groupId>
+    <artifactId>itext</artifactId>
+    <version>2.1.7</version>
+</dependency>
+
+<!-- Commons Logging -->
+<dependency>
+    <groupId>commons-logging</groupId>
+    <artifactId>commons-logging</artifactId>
+    <version>1.2</version>
+</dependency>
+
+<!-- BeanUtils (requisito interno do Jasper para collections complexas) -->
+<dependency>
+    <groupId>commons-beanutils</groupId>
+    <artifactId>commons-beanutils</artifactId>
+    <version>1.9.4</version>
+</dependency>
+<dependency>
+    <groupId>org.webjars.npm</groupId>
+    <artifactId>primeicons</artifactId>
+    <version>4.1.0</version> <!-- ou a versão compatível com o PrimeFaces 6.2 -->
+</dependency>
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version>
+    <scope>provided</scope>
+</dependency>
 	  </dependencies>
     
 </project>

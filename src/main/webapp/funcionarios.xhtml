@@ -5,9 +5,14 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>Funcionários - IRRF</title>
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
 </h:head>
+
 <h:body>
-	<h:form>
+
+	<!-- FORMULÁRIO DE CADASTRO -->
+	<h:form id="formCadastro">
 		<h2>Cadastro de Funcionário</h2>
 
 		<p:panel header="Dados do Funcionário" style="margin-bottom:20px;">
@@ -36,13 +41,16 @@
 			</h:panelGrid>
 
 			<p:commandButton value="Salvar" action="#{funcionarioBean.inserir}"
-				update="@form" icon="pi pi-save" />
+				update="formCadastro formTabela" icon="pi pi-save" />
 		</p:panel>
+	</h:form>
 
+	<!-- FORMULÁRIO DE LISTAGEM -->
+	<h:form id="formTabela">
 		<h2>Lista de Funcionários</h2>
 
 		<p:dataTable value="#{funcionarioBean.funcionarios}" var="f"
-			editable="true" styleClass="table">
+			styleClass="table">
 			<p:column headerText="ID">
 				<h:outputText value="#{f.id}" />
 			</p:column>
@@ -61,20 +69,23 @@
 			<p:column headerText="Descontos">
 				<h:outputText value="#{f.descontos}" />
 			</p:column>
+
 			<p:column headerText="Ações">
 				<p:commandButton icon="pi pi-trash"
-					action="#{funcionarioBean.deletar(f.id)}" update="@form" />
+					action="#{funcionarioBean.deletar(f.id)}" update="formTabela"
+					process="@this" title="Excluir funcionário" />
+
+				<p:commandButton icon="pi pi-file-pdf" value="PDF"
+					onclick="window.open('#{request.contextPath}/relatorio-funcionario?id=#{f.id}', '_blank'); return false;"
+					type="button" title="Baixar Relatório PDF" />
+
 			</p:column>
+
 			<p:column headerText="IRRF">
 				<h:outputText value="#{f.irrfCalculado}">
 					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
 				</h:outputText>
 			</p:column>
-
-
-
-
-
 		</p:dataTable>
 	</h:form>
 </h:body>
