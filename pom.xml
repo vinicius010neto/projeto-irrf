@@ -41,48 +41,48 @@
 	    
 	  </dependency>
 	
-	  <!-- JSF Implementation -->
+	  
 	  <dependency>
 	    <groupId>com.sun.faces</groupId>
 	    <artifactId>jsf-impl</artifactId>
 	    <version>2.2.20</version>
 	  </dependency>
 	
-	  <!-- PrimeFaces (opcional, mas geralmente usado com JSF) -->
+	
 	  <dependency>
 	    <groupId>org.primefaces</groupId>
 	    <artifactId>primefaces</artifactId>
 	    <version>6.2</version>
 	  </dependency>
 	
-	  <!-- JasperReports (para gerar PDF do IRRF) -->
+	
 	  <dependency>
 	    <groupId>net.sf.jasperreports</groupId>
 	    <artifactId>jasperreports</artifactId>
 	    <version>6.20.0</version>
 	  </dependency>
 	
-	  <!-- Se for usar PostgreSQL -->
+	
 	  <dependency>
 	    <groupId>org.postgresql</groupId>
 	    <artifactId>postgresql</artifactId>
 	    <version>42.2.27</version>
 	  </dependency>
-	  <!-- iText para exportação em PDF -->
+	 
 <dependency>
     <groupId>com.lowagie</groupId>
     <artifactId>itext</artifactId>
     <version>2.1.7</version>
 </dependency>
 
-<!-- Commons Logging -->
+
 <dependency>
     <groupId>commons-logging</groupId>
     <artifactId>commons-logging</artifactId>
     <version>1.2</version>
 </dependency>
 
-<!-- BeanUtils (requisito interno do Jasper para collections complexas) -->
+
 <dependency>
     <groupId>commons-beanutils</groupId>
     <artifactId>commons-beanutils</artifactId>
@@ -91,7 +91,7 @@
 <dependency>
     <groupId>org.webjars.npm</groupId>
     <artifactId>primeicons</artifactId>
-    <version>4.1.0</version> <!-- ou a versão compatível com o PrimeFaces 6.2 -->
+    <version>4.1.0</version> 
 </dependency>
 <dependency>
     <groupId>javax.servlet</groupId>
