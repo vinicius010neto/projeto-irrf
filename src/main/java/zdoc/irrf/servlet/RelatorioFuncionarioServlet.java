@@ -21,11 +21,18 @@ public class RelatorioFuncionarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int funcionarioId = Integer.parseInt(req.getParameter("id"));
 
-        Funcionario funcionario = funcionarioDAO.buscarPorId(funcionarioId); 
+        Funcionario funcionario = funcionarioDAO.buscarPorId(funcionarioId);
+
+        // ✅ Calcular IRRF antes de gerar o relatório
+        double irrf = funcionarioDAO.calcularIRRF(
+            funcionario.getSalario().doubleValue(),
+            funcionario.getProventos().doubleValue()
+        );
+        funcionario.setIrrfCalculado(irrf);
+
         List<Funcionario> lista = Collections.singletonList(funcionario);
 
         try {
-        	
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("id", funcionario.getId());
@@ -35,11 +42,10 @@ public class RelatorioFuncionarioServlet extends HttpServlet {
             parameters.put("proventos", funcionario.getProventos());
             parameters.put("irrf", funcionario.getIrrfCalculado());
 
-       
             InputStream jasperStream = getClass().getClassLoader()
-            	    .getResourceAsStream("zdoc/irrf/report/funcionario.jasper");
+                .getResourceAsStream("zdoc/irrf/report/funcionario.jasper");
 
-            	JasperPrint print = JasperFillManager.fillReport(jasperStream, parameters, dataSource);
+            JasperPrint print = JasperFillManager.fillReport(jasperStream, parameters, dataSource);
 
             resp.setContentType("application/pdf");
             resp.setHeader("Content-Disposition", "attachment; filename=relatorio_funcionario_" + funcionario.getId() + ".pdf");
