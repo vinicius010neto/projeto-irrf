@@ -5,12 +5,11 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>Funcionários - IRRF</title>
-	<h:outputStylesheet name="primeicons/primeicons.css"
-		library="primefaces" />
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeicons@4.1.0/primeicons.css" />
 </h:head>
 
 <h:body>
-
 
 	<h:form id="formCadastro">
 		<h2>Cadastro de Funcionário</h2>
@@ -40,11 +39,10 @@
 					value="#{funcionarioBean.funcionario.descontos}" />
 			</h:panelGrid>
 
-			<p:commandButton value="Salvar" action="#{funcionarioBean.inserir}"
-				update="formCadastro formTabela" icon="pi pi-save" />
+			<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}"
+				update="formCadastro formTabela" />
 		</p:panel>
 	</h:form>
-
 
 	<h:form id="formTabela">
 		<h2>Lista de Funcionários</h2>
@@ -61,24 +59,33 @@
 				<h:outputText value="#{f.cpf}" />
 			</p:column>
 			<p:column headerText="Salário">
-				<h:outputText value="#{f.salario}" />
+				<h:outputText value="#{f.salario}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Proventos">
-				<h:outputText value="#{f.proventos}" />
+				<h:outputText value="#{f.proventos}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Descontos">
-				<h:outputText value="#{f.descontos}" />
+				<h:outputText value="#{f.descontos}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+				</h:outputText>
 			</p:column>
 
 			<p:column headerText="Ações">
-				<p:commandButton icon="pi pi-trash"
+				<p:commandButton value="Editar"
+					action="#{funcionarioBean.editar(f)}" update="formCadastro"
+					process="@this" title="Editar funcionário" />
+
+				<p:commandButton value="Excluir"
 					action="#{funcionarioBean.deletar(f.id)}" update="formTabela"
 					process="@this" title="Excluir funcionário" />
 
-				<p:commandButton icon="pi pi-file-pdf" value="PDF"
+				<p:commandButton value="Baixar PDF"
 					onclick="window.open('#{request.contextPath}/relatorio-funcionario?id=#{f.id}', '_blank'); return false;"
 					type="button" title="Baixar Relatório PDF" />
-
 			</p:column>
 
 			<p:column headerText="IRRF">

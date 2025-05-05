@@ -28,16 +28,18 @@ public class FuncionarioBean implements Serializable {
 		}
 	}
 
-	public void inserir() {
-		funcionarioDAO.inserir(funcionario);
+	public void salvar() {
+		if (funcionario.getId() == 0) {
+			funcionarioDAO.inserir(funcionario);
+		} else {
+			funcionarioDAO.atualizar(funcionario);
+		}
 		funcionario = new Funcionario();
 		listar();
 	}
 
-	public void atualizar() {
-		funcionarioDAO.atualizar(funcionario);
-		funcionario = new Funcionario();
-		listar();
+	public void editar(Funcionario f) {
+		this.funcionario = f;
 	}
 
 	public void deletar(int id) {
@@ -71,8 +73,8 @@ public class FuncionarioBean implements Serializable {
 	}
 
 	public void gerarRelatorioFuncionario(Funcionario funcionario) {
-	    GeradorRelatorio gerador = new GeradorRelatorio();
-	    gerador.gerarPDF(Arrays.asList(funcionario));
+		GeradorRelatorio gerador = new GeradorRelatorio();
+		gerador.gerarPDF(Arrays.asList(funcionario));
 	}
 
 }
